@@ -21,10 +21,6 @@ function renderHeader() {
   const header = document.getElementById('top-header');
   if (!header) return;
   const state = getState();
-  ['top-header', 'bottom-nav', 'sidebar'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.style.display = loggedIn ? '' : 'none';
-});
   header.innerHTML = `
     <button class="header-back hidden" id="header-back" aria-label="Back">${icons.back}</button>
     <a href="#/home" class="header-brand">
@@ -56,6 +52,12 @@ function renderHeader() {
 function renderNav() {
   const state = getState();
   const wc = state.wishlist?.length || 0;
+  const loggedIn = !!state.user;
+['top-header', 'bottom-nav', 'sidebar'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.style.display = loggedIn ? '' : 'none';
+});
+
   const items = [
     { route: '#/home', icon: icons.home, label: t('nav.home') },
     { route: '#/services', icon: icons.wrench, label: t('nav.services') },
