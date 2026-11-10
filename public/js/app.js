@@ -43,7 +43,7 @@ function renderHeader() {
     renderHeader(); renderNav();
     window.dispatchEvent(new HashChangeEvent('hashchange'));
   }));
-  header.querySelector('.avatar-btn')?.addEventListener('click', () => navigate(state.user ? '#/settings' : '#/login'));
+header.querySelector('button.avatar-btn')?.addEventListener('click', () => navigate(state.user ? '#/settings' : '#/login'));
   const backBtn = header.querySelector('#header-back');
   backBtn?.addEventListener('click', () => history.back());
 }
