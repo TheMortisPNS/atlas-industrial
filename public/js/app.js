@@ -31,6 +31,7 @@ function renderHeader() {
         <button class="${getLang()==='en'?'active':''}" data-lang="en">EN</button>
       </div>
       <button class="theme-toggle" aria-label="Toggle theme">${state.theme==='dark'?icons.sun:icons.moon}</button>
+      <a href="#/wishlist" class="avatar-btn" aria-label="${t('nav.wishlist')}">${icons.heart}</a>
       <button class="avatar-btn" aria-label="${state.user?t('nav.settings'):t('nav.login')}">${icons.user}</button>
     </div>`;
   header.querySelector('.theme-toggle')?.addEventListener('click', () => { toggleTheme(); renderHeader(); renderNav(); });

@@ -6,11 +6,7 @@ import { showToast, icons } from './ui.js';
 import { navigate } from './router.js';
 
 export function validateAFM(afm) {
-  if (!/^\d{9}$/.test(afm)) return false;
-  if (afm === '000000000') return false;
-  let sum = 0;
-  for (let i = 0; i < 8; i++) sum += parseInt(afm[i]) * Math.pow(2, 8 - i);
-  return (sum % 11) % 10 === parseInt(afm[8]);
+  return /^\d{9}$/.test(afm) && afm !== '000000000';
 }
 
 function pwStrength(pw) {
