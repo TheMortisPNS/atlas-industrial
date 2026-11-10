@@ -145,3 +145,34 @@
 @media (min-width: 1024px) {
   .sticky-summary { position: sticky; top: 88px; }
 }
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+#app, #main-content, .page {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+img, svg, video, canvas, table, iframe {
+  max-width: 100%;
+}
+
+.grid-3, .split-layout, .map-layout {
+  min-width: 0;
+}
+
+.grid-3 > *, .split-layout > *, .map-layout > * {
+  min-width: 0;
+}
+
+#map-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+input, select, textarea {
+  font-size: 16px;
+}
