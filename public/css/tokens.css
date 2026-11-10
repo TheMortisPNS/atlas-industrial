@@ -1,0 +1,36 @@
+/* Atlas Inc. INDUSTRIAL — Design Tokens */
+:root {
+  /* Dark theme (default) — "Black titanium" */
+  --bg: #0F1316;
+  --card: #1A2126;
+  --elevated: #232C33;
+  --text: #FFFFFF;
+  --secondary: #B8C2CA;
+  --border: #3A454D;
+  --accent: #F5A623;
+  --text-on-accent: #0F1316;
+  --success: #3DDC84;
+  --error: #FF5C5C;
+  --accent-text-sm: #F5A623;
+  --accent-text-icon: #F5A623;
+  --radius-btn: 16px;
+  --radius-card: 20px;
+  --shadow-glow: 0 0 24px rgba(245,166,35,0.28);
+  --transition: 250ms ease;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg: #F8FAFC;
+  --card: #FFFFFF;
+  --elevated: #F1F5F9;
+  --text: #0F172A;
+  --secondary: #475569;
+  --border: #E2E8F0;
+  --accent: #F5A623;
+  --text-on-accent: #0F1316;
+  --accent-text-sm: #95610F;
+  --accent-text-icon: #B7791F;
+  --success: #137A42;
+  --error: #C72F38;
+}
