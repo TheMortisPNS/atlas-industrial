@@ -1,4 +1,4 @@
-const CACHE_NAME = 'atlas-v5';
+const CACHE_NAME = 'atlas-v6';
 const APP_SHELL = [
   './', './index.html', './offline.html', './manifest.json',
   './css/tokens.css', './css/base.css', './css/components.css', './css/layout.css',
@@ -35,8 +35,11 @@ self.addEventListener('fetch', e => {
   }
   // App shell: cache-first
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => {
-      if (e.request.mode === 'navigate') return caches.match('./offline.html');
-    }))
-  );
-});
+  fetch(e.request).then(res => {
+    if (res.ok && e.request.method === 'GET') {
+      const copy = res.clone();
+      caches.open(CACHE_NAME).then(c => c.put(e.request, copy));
+    }
+    return res;
+  }).catch(() => caches.match(e.request).then(cached => cached || (e.request.mode === 'navigate' ? caches.match('./offline.html') : undefined)))
+);
