@@ -420,3 +420,58 @@ textarea {
     height: 36px;
   }
 }
+/* ===== Mobile header fit ===== */
+.header-back.hidden {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .top-header {
+    padding: 0 8px;
+    gap: 4px;
+  }
+
+  .header-back {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .header-brand {
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: 6px;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .header-brand svg {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+  }
+
+  .header-actions {
+    gap: 0;
+  }
+
+  .lang-toggle {
+    display: none;
+  }
+
+  .theme-toggle,
+  .avatar-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .toast-container {
+    left: 16px;
+    right: 16px;
+  }
+
+  .toast {
+    max-width: 100%;
+  }
+}
