@@ -464,7 +464,7 @@ function renderSettings(container) {
   container.querySelector('#logout-btn')?.addEventListener('click', async () => {
     await signOut();
     setState({ user: null, wishlist: [] });
-    navigate('#/home');
+    navigate('#/login');
     renderNav();
     renderHeader();
   });
@@ -478,7 +478,7 @@ function renderSettings(container) {
       await deleteUserData();
       setState({ user: null, wishlist: [] });
       closeModal(overlay);
-      navigate('#/home');
+      navigate('#/login');
       renderNav();
       renderHeader();
     });
@@ -495,3 +495,31 @@ async function init() {
   renderNav();
 
   registerRoute('#/home', guard(() => renderHome(main())));
+  registerRoute('#/', guard(() => renderHome(main())));
+  registerRoute('#/services', guard(() => renderServices(main())));
+  registerRoute('#/request', guard(params => renderRequest(main(), params)));
+  registerRoute('#/map', guard(() => {
+    destroyMap();
+    renderMap(main());
+  }));
+  registerRoute('#/parts', guard(() => renderParts(main())));
+  registerRoute('#/wishlist', guard(() => renderWishlist(main())));
+  registerRoute('#/login', () => renderLogin(main()));
+  registerRoute('#/register', () => renderRegister(main()));
+  registerRoute('#/forgot-password', () => renderForgotPassword(main()));
+  registerRoute('#/settings', guard(() => renderSettings(main())));
+
+  subscribe(() => {
+    renderNav();
+    renderHeader();
+  });
+
+  initRouter();
+  initPWA();
+}
+
+init().catch(err => {
+  console.error(err);
+  const m = document.getElementById('main-content');
+  if (m) m.innerHTML = '<pre style="padding:16px;color:#f66;white-space:pre-wrap">' + (err && err.stack || err) + '</pre>';
+});

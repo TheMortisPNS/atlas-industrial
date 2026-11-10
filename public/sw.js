@@ -1,4 +1,4 @@
-const CACHE_NAME = 'atlas-v8';
+const CACHE_NAME = 'atlas-v9';
 const APP_SHELL = [
   './', './index.html', './offline.html', './manifest.json',
   './css/tokens.css', './css/base.css', './css/components.css', './css/layout.css',
