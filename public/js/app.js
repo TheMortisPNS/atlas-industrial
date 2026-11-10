@@ -12,12 +12,19 @@ import { initPWA, promptInstall, isInstalled, isIOS } from './pwa.js';
 
 const $ = sel => document.querySelector(sel);
 const main = () => document.getElementById('main-content');
-
+const guard = fn => (p) => {
+  if (!getState().user) { navigate('#/login'); return; }
+  fn(p);
+};
 // ===== HEADER =====
 function renderHeader() {
   const header = document.getElementById('top-header');
   if (!header) return;
   const state = getState();
+  ['top-header', 'bottom-nav', 'sidebar'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.style.display = loggedIn ? '' : 'none';
+});
   header.innerHTML = `
     <button class="header-back hidden" id="header-back" aria-label="Back">${icons.back}</button>
     <a href="#/home" class="header-brand">
@@ -358,13 +365,13 @@ async function init() {
   renderHeader();
   renderNav();
 
-  registerRoute('#/home', () => renderHome(main()));
-  registerRoute('#/', () => renderHome(main()));
-  registerRoute('#/services', () => renderServices(main()));
-  registerRoute('#/request', (p) => renderRequest(main(), p));
-  registerRoute('#/map', () => { destroyMap(); renderMap(main()); });
-  registerRoute('#/parts', () => renderParts(main()));
-  registerRoute('#/wishlist', () => renderWishlist(main()));
+registerRoute('#/home', guard(() => renderHome(main())));
+registerRoute('#/', guard(() => renderHome(main())));
+registerRoute('#/services', guard(() => renderServices(main())));
+registerRoute('#/request', guard((p) => renderRequest(main(), p)));
+registerRoute('#/map', guard(() => { destroyMap(); renderMap(main()); }));
+registerRoute('#/parts', guard(() => renderParts(main())));
+registerRoute('#/wishlist', guard(() => renderWishlist(main())));
   registerRoute('#/login', () => renderLogin(main()));
   registerRoute('#/register', () => renderRegister(main()));
   registerRoute('#/forgot-password', () => renderForgotPassword(main()));
